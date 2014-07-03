@@ -1,0 +1,81 @@
+
+    <div class="container">
+      <div class = "row">
+        <div class = "col-xs-12"> 
+          <div class = "well">
+            Todos Los Juegos
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class= "col-xs-4">
+                Ordenar por:  <select ng-model="sortorder" class="form-control">
+                <option value="-averageRating">Rating</option>
+                <option value="+averageRating">Rating Inverso</option>
+                <option value="posRank">Rank</option>
+                <option value="-posRank">Rank Inverso</option>
+                <option value="+name">Alfabética</option>
+                <option value="-name">Alfabética Inverso</option>
+                </select>
+          </div>
+          <div class= "col-xs-8">
+                Propriedores:  <br>
+                  <div class="row">
+                    <div class="col-xs-2" ng-repeat="player in players">
+                  <label  class="checkbox-inline">
+                                <input
+                                  type="checkbox"
+                                  value="{{player.name}}"
+                                  ng-model="player.selected"
+                                > {{player.name}}
+                              </label>
+                    </div>
+                  </div>
+      </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+              {{gameStats()}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="container">
+      <div class = "row">
+        <div ng-repeat="game in getGames() | playerFilter:players | orderBy:sortorder" class = "col-md-3 col-sm-4 col-xs-6" style="height:550px" >
+          <div  class = "panel panel-{{game.isExpansion === false? 'info':'success'}}" >
+            <div class="panel-heading">
+              <h3 class="panel-title">{{game.name}} </h3>
+            </div>
+            <div class="panel-body">
+                  <div style="text-align:center;">
+
+                    <img src="{{game.thumbnail}}" style="max-width:100" class="img-thumbnail">   
+                  </div>
+                  <br>
+                  <table class="table">
+                  <tr> <td colspan="2" style="text-align:center;"> {{game.isExpansion === false? 'FULL GAME':'EXPANSION'}} </td> </tr>
+                    <tr>
+                      <td>Average Rating : </td> <td> {{game.averageRating | number:2}} </td>
+                    </tr>
+                    <tr>
+                      <td>BGG Rank : </td> <td> {{game.rank}} </td>
+                    </tr>                    
+                    <tr>
+                      <td>Players : </td> <td> {{game.minPlayers}}–{{game.maxPlayers}} </td>
+                    </tr>
+                    <tr>
+                      <td>BGG Def : </td> <td> <a href="http://boardgamegeek.com/thing/{{game.gameId}}"> BGG link </a> </td>
+                    </tr>
+                  </table>
+            </div>
+            <div class = "panel-footer ">
+              <div class="owners"> <span  ng-repeat="owner in game.owners | ownedFilter: players" > {{owner}}{{ $last !== true ? "," : "" }}</span> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
