@@ -2,9 +2,10 @@
     <div class="container">
       <div class = "row">
         <div class = "col-xs-12"> 
-          <div class = "well">
-            Todos Los Juegos
-          </div>
+
+        <h1> Boardgames Monterrey <small>Todos Los Juegos</small></h1>
+        <hr>
+
         </div>
       </div>
       <div class="row">
@@ -14,30 +15,22 @@
                 <option value="+averageRating">Rating Inverso</option>
                 <option value="posRank">Rank</option>
                 <option value="-posRank">Rank Inverso</option>
-                <option value="+name">Alfabética</option>
-                <option value="-name">Alfabética Inverso</option>
+                <option value="+name">Alfabético</option>
+                <option value="-name">Alfabético Inverso</option>
                 </select>
           </div>
           <div class= "col-xs-8">
-                Propriedores:  <br>
-                  <div class="row">
-                    <div class="col-xs-2" ng-repeat="player in players">
+            Propietarios:  <br>
+              <div class="row">
+                <div class="col-xs-2" ng-repeat="player in players">
                   <label  class="checkbox-inline">
-                                <input
-                                  type="checkbox"
-                                  value="{{player.name}}"
-                                  ng-model="player.selected"
-                                > {{player.name}}
-                              </label>
-                    </div>
-                  </div>
-      </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-              {{gameStats()}}
+                    <input type="checkbox" value="{{player.name}}" ng-model="player.selected"> {{player.name}}
+                  </label>
+                </div>
+              </div>
           </div>
         </div>
+        <hr>
       </div>
     </div>
 
